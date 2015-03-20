@@ -14,26 +14,26 @@
         mainCtrl.SKIP_SPLIT_ABOVE_MAX = 0;
         mainCtrl.SKIP_SPLIT = 0;
 
-        var oldView;
+        var ctx = renderer(mainCtrl.scene.width, mainCtrl.scene.height);
+
+        ctx.renderMap(mainCtrl.scene.width, mainCtrl.scene.height, {
+            MAX_LEAF_SIZE: mainCtrl.MAX_LEAF_SIZE,
+            MIN_LEAF_SIZE: mainCtrl.MIN_LEAF_SIZE,
+            SKIP_SPLIT_ABOVE_MAX: mainCtrl.SKIP_SPLIT_ABOVE_MAX,
+            SKIP_SPLIT: mainCtrl.SKIP_SPLIT
+        });
+
+        var stageElement = document.getElementById('stage');
+
+        stage.appendChild(ctx.renderer.view);
 
         mainCtrl.setView = function setView() {
-            var view = renderer(mainCtrl.scene.width, mainCtrl.scene.height, {
+            ctx.renderMap(mainCtrl.scene.width, mainCtrl.scene.height, {
                 MAX_LEAF_SIZE: mainCtrl.MAX_LEAF_SIZE,
                 MIN_LEAF_SIZE: mainCtrl.MIN_LEAF_SIZE,
                 SKIP_SPLIT_ABOVE_MAX: mainCtrl.SKIP_SPLIT_ABOVE_MAX,
                 SKIP_SPLIT: mainCtrl.SKIP_SPLIT
             });
-
-            var stage = document.getElementById('stage');
-
-            if (oldView) {
-                stage.replaceChild(view, oldView);
-            } else {
-                stage.appendChild(view);
-            }
-            oldView = view;
         };
-
-        mainCtrl.setView();
     }]);
 }());
