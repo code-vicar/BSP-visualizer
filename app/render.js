@@ -15,16 +15,14 @@
         stage.addChild(graphics);
     }
 
-    function renderLeaf(stage, leaf) {
-        if (!leaf.leftChild && !leaf.rightChild) {
-            drawRect(stage, leaf.pos.x, leaf.pos.y, leaf.size.w, leaf.size.h);
-        }
+    function renderLeafs(stage, graph) {
+        var i, v, len, vertexIds = graph.vertexIds();
 
-        if (leaf.leftChild) {
-            renderLeaf(stage, leaf.leftChild);
-        }
-        if (leaf.rightChild) {
-            renderLeaf(stage, leaf.rightChild);
+        for (i = 0, len = vertexIds.length; i < len; i++) {
+            if (graph.degrees[vertexIds[i]] <= 1) {
+                v = graph.vertex(vertexIds[i]);
+                drawRect(stage, v.pos.x, v.pos.y, v.size.w, v.size.h);
+            }
         }
     }
 
@@ -47,14 +45,23 @@
                 renderer.render(stage);
             }
 
+            var outerX = x,
+                outerY = y;
+
             return {
                 stage: stage,
                 renderer: renderer,
                 renderMap: function(x, y, opts) {
-                    stage.removeChildren();
-                    var mapTree = generateMap(x, y, opts);
+                    if (outerX !== x || outerY !== y) {
+                        renderer.resize(x, y);
+                        outerX = x;
+                        outerY = y;
+                    }
 
-                    renderLeaf(stage, mapTree);
+                    stage.removeChildren();
+                    var mapGraph = generateMap(x, y, opts);
+
+                    renderLeafs(stage, mapGraph);
                 }
             };
         };
