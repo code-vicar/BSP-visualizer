@@ -59,7 +59,7 @@
                     }
 
                     stage.removeChildren();
-                    var mapGraph = generateMap(x, y, opts);
+                    var mapGraph = generateMap(y, x, opts);
 
                     renderLeafs(stage, mapGraph);
                 }
