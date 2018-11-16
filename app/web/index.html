@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BSP Visualizer</title>
+    <script type="text/javascript" src="generateMap.js"></script>
+    <script type="text/javascript" src="pixi.min.js"></script>
+    <script type="module" src="index.mjs"></script>
+  </head>
+  <body>
+    <div>
+      <div style="float:left; width:180px;" >
+        options
+        <form onchange="mainCtrl.onChange(event)" id="optionsForm">
+        </form>
+        <div>
+          <button onclick="mainCtrl.renderMap()">Render</button>
+        </div>
+      </div>
+      <div id="stage" style="float:left;">
+      </div>
+    </div>
+
+    <template id="mapOptions">
+      <div>
+        <span>height</span><br/>
+        <input name="height" type="number" />
+      </div>
+      <div>
+        <span>width</span><br/>
+        <input name="width" type="number" />
+      </div>
+      <div>
+        <span>Max Leaf Size</span><br/>
+        <input name="MAX_LEAF_SIZE" type="number" />
+      </div>
+      <div>
+        <span>Min Leaf Size</span><br/>
+        <input name="MIN_LEAF_SIZE" type="number" />
+      </div>
+      <div>
+        <span>Skip Split Above Max %</span><br/>
+        <input name="SKIP_SPLIT_ABOVE_MAX" type="number" />
+      </div>
+      <div>
+        <span>Skip Split %</span><br/>
+        <input name="SKIP_SPLIT" type="number" />
+      </div>
+    </template>
+  </body>
+</html>
+
+
