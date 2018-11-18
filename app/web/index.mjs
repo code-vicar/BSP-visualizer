@@ -3,28 +3,36 @@ import { rendering } from './render.mjs'
 
 const optionsTemplate = (values) => html`
     <div>
-        <span>height</span><br/>
+        <span>Map height</span><br/>
         <input name="height" type="number" value="${values.height}" />
     </div>
     <div>
-        <span>width</span><br/>
+        <span>Map width</span><br/>
         <input name="width" type="number" value="${values.width}" />
     </div>
     <div>
-        <span>Max Leaf Size</span><br/>
-        <input name="MAX_LEAF_SIZE" type="number" value="${values.MAX_LEAF_SIZE}" />
+        <span>Minimum room height length</span><br/>
+        <input name="minHeight" type="number" value="${values.minHeight}" />
     </div>
     <div>
-        <span>Min Leaf Size</span><br/>
-        <input name="MIN_LEAF_SIZE" type="number" value="${values.MIN_LEAF_SIZE}" />
+        <span>Minimum room width length</span><br/>
+        <input name="minWidth" type="number" value="${values.minWidth}" />
     </div>
     <div>
-        <span>Skip Split Above Max %</span><br/>
-        <input name="SKIP_SPLIT_ABOVE_MAX" type="number" value="${values.SKIP_SPLIT_ABOVE_MAX}" />
+        <span>Stop splitting height when below</span><br/>
+        <input name="stopHeight" type="number" value="${values.stopHeight}" />
     </div>
     <div>
-        <span>Skip Split %</span><br/>
-        <input name="SKIP_SPLIT" type="number" value="${values.SKIP_SPLIT}" />
+        <span>Stop splitting width when below</span><br/>
+        <input name="stopWidth" type="number" value="${values.stopWidth}" />
+    </div>
+    <div>
+        <span>Skip splitting a room this percentage of times</span><br/>
+        <input name="ignoreSplitPercent" type="number" value="${values.ignoreSplitPercent}" />
+    </div>
+    <div>
+        <span>Ignore room height/width stops this percentage of times</span><br/>
+        <input name="ignoreStopPercent" type="number" value="${values.ignoreStopPercent}" />
     </div>
 `;
 
@@ -33,10 +41,12 @@ class MainController {
         this.state = {
             width: 400,
             height: 400,
-            MAX_LEAF_SIZE: 150,
-            MIN_LEAF_SIZE: 80,
-            SKIP_SPLIT_ABOVE_MAX: 2,
-            SKIP_SPLIT: 8
+            minHeight: 25,
+            stopHeight: 60,
+            minWidth: 25,
+            stopWidth: 60,
+            ignoreSplitPercent: 10,
+            ignoreStopPercent: 10
         }
         this.onChange = this.onChange.bind(this)
         this.renderForm = this.renderForm.bind(this)

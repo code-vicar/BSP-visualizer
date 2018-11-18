@@ -7,7 +7,7 @@
   "author": "Scott Vickers",
   "license": "Apache-2.0",
   "dependencies": {
-    "BSP-js": "git+https://github.com/code-vicar/BSP-js.git",
+    "@code-vicar/bsp": "^1.1.1",
     "koa": "^2.6.2",
     "koa-static": "^5.0.0",
     "lit-html": "^0.13.0",
